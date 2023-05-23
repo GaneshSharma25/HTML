@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+
+<body>
+    <form>
+        <table border="1" style="background-color: pink;">
+
+            <tbody>
+
+                <tr>
+                    <td> <label for="Name">Name</label> </td>
+                    <td> <input type="text" name="Name" id="Name" placeholder="enter your name"></td>
+                </tr>
+                <tr>
+                    <td><label for="emp">Employee Code</label></td>
+                    <td><input type="text" name="emp" id="emp" style="width: 40;"></td>
+                </tr>
+                <tr>
+                    <td><label for="dept">Department</label></td>
+                    <td>
+                        <input type="radio" name="dept" value="admin" id="admin"><label for="admin">Admin</label><br>
+                        <input type="radio" name="dept" value="hr" id="hr"><label for="hr">HR</label><br>
+                        <input type="radio" name="dept" value="technical" id="technical"><label
+                            for="technical">Technical</label><br>
+                        <input type="radio" name="dept" value="accounts" id="accounts"><label
+                            for="accounts">Accounts</label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="doj">Date of Joining</label></td>
+                    <td>
+                        <input type="text" name="doj" id="dd" placeholder="dd" style="width: 40;"> /
+                        <input type="text" name="doj" id="mm" placeholder="mm" style="width: 40;"> /
+                        <input type="text" name="doj" id="yyyy" placeholder="yyyy" style="width: 60;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="address">Address</label></td>
+                    <td><textarea name="address" id="address" cols="30" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="programs">Training programs Attended</label></td>
+                    <td><input type="checkbox" name="programs" value="html" id="html"><label
+                            for="html">HTML/DHTML</label><br>
+                        <input type="checkbox" name="programs" value="java" id="java"><label for="java">JAVA</label><br>
+                        <input type="checkbox" name="programs" value="client" id="client"><label
+                            for="client">CLIENT/SERVER</label><br>
+                        <input type="checkbox" name="programs" value="net" id="net"><label for="net">.NET</label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="training">Training Programmers need to attend</label></td>
+                    <td>
+                        <select name="training" id="training" style="height: 40;" multiple>
+                            <option value="javascript">JAVASCRIPT</option><br>
+                            <option value="jstruts">JSTRUTS</option><br>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="send">Send the Information at</label></td>
+                    <td>
+                        <a href="emailTo:ganesharts25@gmail.com">ganesharts25@gmail.com</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>
