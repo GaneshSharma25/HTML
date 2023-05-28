@@ -8,6 +8,15 @@
 </head>
 
 <body>
+    <style>
+        .myclass{
+            display: none;
+        }
+
+        .mycls{
+            display: block;
+        }
+    </style>
 
     <script>
         var productArray = [];
@@ -24,7 +33,7 @@
             }
         }
 
-        productArray.push(new Product(1, "Chips", 35, 20));
+        productArray.push(new Product(1, "chips", 35, 20));
         console.log(productArray);
 
         function addProduct() {
@@ -48,13 +57,30 @@
             console.log("inside disp");
             for (const product of productArray) {
 
-                productStr = productStr + `<tr> <td> ${product.pid}</td><td> ${product.pname}</td> <td> ${product.qty}</td> <td> ${product.price}</td> <td> <button type="button" id="btn4">productDetails</button></td> </tr>`;
+                productStr = productStr + `<tr> <td> ${product.pid}</td><td> ${product.pname}</td> <td> ${product.qty}</td> 
+                    <td> ${product.price}</td> <td> <button type="button" id="btn4" onclick="displayData(${product.pid})">productDetails</button></td> </tr>`;
             }
             productStr = productStr + "</tbody> </table>";
 
             document.getElementById("mydiv").innerHTML = productStr;
         }
-        
+
+        function displayData(pid) {
+            let index = productArray.findIndex(p => p.pid === pid);
+            let mydiv = document.getElementById("mydiv1");
+            mydiv.classList.add("mycls");
+            mydiv.classList.remove("myclass");
+            let str = "";
+            if(index!==-1){
+                str = `ID: ${productArray[index].pid} <br> pname: ${productArray[index].pname} <br> qty: ${productArray[index].qty} <br> price: ${productArray[index].price}`;
+                mydiv.innerHTML = str;
+            }else{
+                mydiv.innerHTML = "Element not found..."
+            }
+
+
+        }
+
 
         function updateProduct() {
             let pid = +(document.getElementById("pid").value);
@@ -74,21 +100,36 @@
             clearTable();
         }
 
-        function deleteProduct(){
+        function deleteProduct() {
             let pid = +(document.getElementById("pid").value);
             var index = productArray.findIndex(p => p.pid === pid);
             if (index != -1) {
                 let check = confirm("do you want to delete the product?");
                 if (check) {
-                   productArray.splice(index,1);
-                   displayAllProducts();
+                    productArray.splice(index, 1);
+                    displayAllProducts();
                 }
             } else {
                 alert("Product not found..");
             }
             clearTable();
         }
-        
+        function filterData(event){
+            console.log(event.key);
+            console.log(event.which);
+            if(event.which === 13){
+                let prdName = document.getElementById("search").value;
+                let index = productArray.findIndex(p => p.pname === prdName);
+                if(index!==-1){
+                    displayData(productArray[index].pid);
+                }else{
+                    displayData(99999);
+                }
+               
+            }
+          
+        }
+
 
 
     </script>
@@ -136,7 +177,15 @@
                         <button type="button" name="btn1" id="btn1" onclick="deleteProduct()">delete</button>
                         <button type="button" name="btn2" id="btn2" onclick="updateProduct()">Update product</button>
                         <button type="button" name="btn3" id="btn3" onclick="displayAllProducts()">Display all
-                        Product</button>
+                            Product</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Search Product
+                    </td>
+                    <td>
+                        <input type="text" id="search" name="search" onkeydown="filterData(event)">
                     </td>
                 </tr>
             </tbody>
@@ -145,8 +194,8 @@
 
         <div id="mydiv">
         </div>
-
-        <div id="mydiv1">
+        <br>
+        <div id="mydiv1" class="myclass">
 
         </div>
 
