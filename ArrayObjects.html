@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayOfObjects</title>
+</head>
+
+<body>
+
+    <script>
+        var productArray = [];
+        class Product {
+            constructor(pid, pname, qty, price) {
+                this.pid = pid;
+                this.pname = pname;
+                this.qty = qty;
+                this.price = price;
+            }
+
+            displayProduct() {
+                return "pid: " + this.pid + ", pname: " + this.pname + ", qty: " + this.qty + ", price: " + this.price;
+            }
+        }
+
+        productArray.push(new Product(1, "Chips", 35, 20));
+        console.log(productArray);
+
+        function addProduct() {
+            let pid = +(document.getElementById("pid").value);
+            let pname = document.getElementById("pname").value;
+            let qty = +(document.getElementById("qty").value);
+            let price = +(document.getElementById("price").value);
+            productArray.push(new Product(pid, pname, qty, price));
+            clearTable();
+        }
+        function clearTable() {
+            document.getElementById("pid").value = "";
+            document.getElementById("pname").value = "";
+            document.getElementById("qty").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("pid").focus();
+        }
+
+        function displayAllProducts() {
+            let productStr = "<h3>Product Details</h3><table border=2px width=300px> <tbody> <tr> <td>Pid</td><td>pname</td><td>qty</td><td>price</td></tr>";
+            console.log("inside disp");
+            for (const product of productArray) {
+
+                productStr = productStr + `<tr> <td> ${product.pid}</td><td> ${product.pname}</td> <td> ${product.qty}</td> <td> ${product.price}</td> <td> <button type="button" id="btn4">productDetails</button></td> </tr>`;
+            }
+            productStr = productStr + "</tbody> </table>";
+
+            document.getElementById("mydiv").innerHTML = productStr;
+        }
+        
+
+        function updateProduct() {
+            let pid = +(document.getElementById("pid").value);
+            var index = productArray.findIndex(p => p.pid === pid);
+            if (index != -1) {
+                let check = confirm("do you want to update product details?");
+                if (check) {
+                    let newQty = prompt(`Enter new Quantity for productId:${pid}`);
+                    let newPrice = prompt(`Enter new Price for productId:${pid}`);
+                    productArray[index].qty = newQty;
+                    productArray[index].price = newPrice;
+                    displayAllProducts();
+                }
+            } else {
+                alert("Product not found..");
+            }
+            clearTable();
+        }
+
+        function deleteProduct(){
+            let pid = +(document.getElementById("pid").value);
+            var index = productArray.findIndex(p => p.pid === pid);
+            if (index != -1) {
+                let check = confirm("do you want to delete the product?");
+                if (check) {
+                   productArray.splice(index,1);
+                   displayAllProducts();
+                }
+            } else {
+                alert("Product not found..");
+            }
+            clearTable();
+        }
+        
+
+
+    </script>
+    <form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        Product ID:
+                    </td>
+                    <td>
+                        <input type="text" name="pid" id="pid">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Product Name:
+                    </td>
+                    <td>
+                        <input type="text" name="pname" id="pname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Product Quantity:
+                    </td>
+                    <td>
+                        <input type="text" name="qty" id="qty">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Product Price:
+                    </td>
+                    <td>
+                        <input type="text" name="price" id="price">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button type="button" name="btn" id="btn" onclick="addProduct()">Add new Product</button>
+                    </td>
+                    <td>
+                        <button type="button" name="btn1" id="btn1" onclick="deleteProduct()">delete</button>
+                        <button type="button" name="btn2" id="btn2" onclick="updateProduct()">Update product</button>
+                        <button type="button" name="btn3" id="btn3" onclick="displayAllProducts()">Display all
+                        Product</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <div id="mydiv">
+        </div>
+
+        <div id="mydiv1">
+
+        </div>
+
+    </form>
+
+</body>
+
+</html>
